@@ -2,6 +2,7 @@ package kodlama.io.devs.webApi.controller;
 
 import kodlama.io.devs.business.abstracts.ProgrammingLanguageService;
 import kodlama.io.devs.entities.concretes.ProgrammingLanguage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class ProgrammingLanguagesController {
 
     private ProgrammingLanguageService programmingLanguageService;
 
+    @Autowired
     public ProgrammingLanguagesController(ProgrammingLanguageService programmingLanguageService) {
         this.programmingLanguageService = programmingLanguageService;
     }

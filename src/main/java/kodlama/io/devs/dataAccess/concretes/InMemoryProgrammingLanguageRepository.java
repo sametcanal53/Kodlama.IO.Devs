@@ -2,6 +2,7 @@ package kodlama.io.devs.dataAccess.concretes;
 
 import kodlama.io.devs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlama.io.devs.entities.concretes.ProgrammingLanguage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
 
     ArrayList<ProgrammingLanguage> programmingLanguages;
 
+    @Autowired
     public InMemoryProgrammingLanguageRepository() {
         programmingLanguages = new ArrayList<ProgrammingLanguage>();
         programmingLanguages.add(new ProgrammingLanguage(1,"C#"));
