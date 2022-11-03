@@ -1,8 +1,8 @@
 package kodlama.io.devs.business.concretes;
 
 import kodlama.io.devs.business.abstracts.ProgrammingLanguageService;
-import kodlama.io.devs.business.requests.create.CreateProgrammingLanguage;
-import kodlama.io.devs.business.requests.update.UpdateProgrammingLanguage;
+import kodlama.io.devs.business.requests.create.CreateProgrammingLanguageRequest;
+import kodlama.io.devs.business.requests.update.UpdateProgrammingLanguageRequest;
 import kodlama.io.devs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlama.io.devs.entities.concretes.ProgrammingLanguage;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +24,13 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
     @Override
     public ProgrammingLanguage getById(int id) {
+        if(!programmingLanguageRepository.existsById(id))
+            throw new RuntimeException("Programming Language Not Found!");
         return this.programmingLanguageRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ResponseEntity<ProgrammingLanguage> add(CreateProgrammingLanguage createProgrammingLanguage) {
+    public ResponseEntity<ProgrammingLanguage> add(CreateProgrammingLanguageRequest createProgrammingLanguage) {
         for(ProgrammingLanguage programmingLanguage : getAll())
             if(createProgrammingLanguage.getName().equals(programmingLanguage.getName()))
                 throw new RuntimeException("Programming Language Name Is Already Registered");
@@ -43,7 +45,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
     }
 
     @Override
-    public ResponseEntity<ProgrammingLanguage> update(UpdateProgrammingLanguage updateProgrammingLanguage) {
+    public ResponseEntity<ProgrammingLanguage> update(UpdateProgrammingLanguageRequest updateProgrammingLanguage) {
         for(ProgrammingLanguage programmingLanguage : getAll())
             if(updateProgrammingLanguage.getName().equals(programmingLanguage.getName()))
                 throw new RuntimeException("Programming Language Name Is Already Registered");

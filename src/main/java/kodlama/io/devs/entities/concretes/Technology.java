@@ -1,5 +1,6 @@
 package kodlama.io.devs.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
-
 
 @Data
 @NoArgsConstructor
@@ -16,8 +15,9 @@ import java.util.List;
 @Builder
 
 @Entity
-@Table(name = "programming_language")
-public class ProgrammingLanguage {
+@Table(name = "technology")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","programmingLanguageId"})
+public class Technology {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,10 @@ public class ProgrammingLanguage {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "programmingLanguage",cascade = CascadeType.ALL)
-    private List<Technology> technologies;
+    @Column(name = "programming_language_id")
+    private int programmingLanguageId;
+
+    @ManyToOne()
+    @JoinColumn(name = "programming_language_id", insertable = false, updatable = false)
+    private ProgrammingLanguage programmingLanguage;
 }
