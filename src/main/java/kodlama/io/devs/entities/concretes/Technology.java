@@ -16,7 +16,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "technology")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","programmingLanguageId"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","programmingLanguage","programmingLanguageId"})
 public class Technology {
 
     @Id
